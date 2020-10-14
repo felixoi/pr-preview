@@ -1,0 +1,18 @@
+name: pr-deployment
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: test action
+        uses: felixoi/pr-preview-action@v0.4.29
+        with:
+          PREVIEW_REPOSITORY: "felixoi/pr-preview"
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          PA_TOKEN: "${{ secrets.PA_TOKEN }}"
+          GITHUB_PAGES_BASE: "https://felixoi.github.io/pr-preview"
